@@ -1,0 +1,29 @@
+#!/bin/bash
+
+mkdir -p ~/.streamlit/
+
+echo "\
+[theme]
+primaryColor = '#00F5FF'
+backgroundColor = '#0F2027'
+secondaryBackgroundColor = '#203A43'
+textColor = '#FAFAFA'
+font = 'sans serif'
+
+[client]
+showErrorDetails = true
+toolbarMode = 'minimal'
+
+[logger]
+level = 'info'
+
+[server]
+port = 8501
+headless = true
+runOnSave = true
+maxUploadSize = 200
+enableXsrfProtection = true
+
+[browser]
+gatherUsageStats = false
+" > ~/.streamlit/config.toml

@@ -46,7 +46,9 @@ def generate_and_train_model():
 
     # --- 2. Lưu dữ liệu ---
     # Tạo thư mục 'data' nếu chưa tồn tại
-    data_dir = '../data'
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    project_root = os.path.dirname(current_dir)
+    data_dir = os.path.join(project_root, 'data')
     os.makedirs(data_dir, exist_ok=True)
     data_path = os.path.join(data_dir, 'synthetic_data.csv')
     df.to_csv(data_path, index=False)
@@ -77,7 +79,7 @@ def generate_and_train_model():
     print("---------------------------------")
 
     # --- 5. Lưu mô hình và các chỉ số ---
-    model_dir = '../model'
+    model_dir = os.path.join(project_root, 'model')
     os.makedirs(model_dir, exist_ok=True)
 
     # Lưu mô hình
@@ -87,9 +89,9 @@ def generate_and_train_model():
 
     # Lưu các chỉ số đánh giá
     metrics = {
-        'r2_score': r2,
-        'mae': mae,
-        'rmse': rmse
+        'r2_score': float(r2),
+        'mae': float(mae),
+        'rmse': float(rmse)
     }
     metrics_path = os.path.join(model_dir, 'model_metrics.json')
     with open(metrics_path, 'w') as f:

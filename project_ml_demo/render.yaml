@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: analytic-score-predictor
+    env: python
+    region: singapore
+    plan: free
+    runtime: python-3.11
+    buildCommand: pip install -r requirements.txt && python app/utils.py
+    startCommand: streamlit run app/app.py --server.port=8501 --server.address=0.0.0.0
+    envVars:
+      - key: PYTHONUNBUFFERED
+        value: true

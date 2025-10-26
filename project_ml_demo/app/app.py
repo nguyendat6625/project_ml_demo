@@ -160,7 +160,14 @@ st.markdown("""
 @st.cache_resource
 def load_model():
     """Tải mô hình hồi quy."""
-    model_path = os.path.join('../model', 'regression_model.pkl')
+    # Hỗ trợ cả đường dẫn tương đối và tuyệt đối
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    model_path = os.path.join(current_dir, '../model', 'regression_model.pkl')
+    
+    # Nếu không tìm thấy, thử đường dẫn khác
+    if not os.path.exists(model_path):
+        model_path = os.path.join(os.path.dirname(current_dir), 'model', 'regression_model.pkl')
+    
     if not os.path.exists(model_path):
         return None
     return joblib.load(model_path)
@@ -168,7 +175,14 @@ def load_model():
 @st.cache_data
 def load_data():
     """Tải dữ liệu huấn luyện."""
-    data_path = os.path.join('../data', 'synthetic_data.csv')
+    # Hỗ trợ cả đường dẫn tương đối và tuyệt đối
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    data_path = os.path.join(current_dir, '../data', 'synthetic_data.csv')
+    
+    # Nếu không tìm thấy, thử đường dẫn khác
+    if not os.path.exists(data_path):
+        data_path = os.path.join(os.path.dirname(current_dir), 'data', 'synthetic_data.csv')
+    
     if not os.path.exists(data_path):
         return None
     return pd.read_csv(data_path)
@@ -176,7 +190,14 @@ def load_data():
 @st.cache_data
 def load_metrics():
     """Tải các chỉ số đánh giá mô hình."""
-    metrics_path = os.path.join('../model', 'model_metrics.json')
+    # Hỗ trợ cả đường dẫn tương đối và tuyệt đối
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    metrics_path = os.path.join(current_dir, '../model', 'model_metrics.json')
+    
+    # Nếu không tìm thấy, thử đường dẫn khác
+    if not os.path.exists(metrics_path):
+        metrics_path = os.path.join(os.path.dirname(current_dir), 'model', 'model_metrics.json')
+    
     if not os.path.exists(metrics_path):
         return None
     with open(metrics_path, 'r') as f:
